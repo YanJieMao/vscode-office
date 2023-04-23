@@ -110,7 +110,6 @@ export class MarkdownService {
             }
             this.copyFromPath(savedImagePath, imagePath);
             const editor = vscode.window.activeTextEditor;
-            const imgName = parse(relPath).name;
             const oldExt = extname(imagePath)
             const { ext = "png" } = (await fileTypeFromFile(imagePath)) ?? {};
             if (oldExt != `.${ext}`) {
@@ -121,13 +120,13 @@ export class MarkdownService {
                 editor?.edit(edit => {
                     let current = editor.selection;
                     if (current.isEmpty) {
-                        edit.insert(current.start, `![${imgName}](${relPath})`);
+                        edit.insert(current.start, `![](${relPath})`);
                     } else {
-                        edit.replace(current, `![${imgName}](${relPath})`);
+                        edit.replace(current, `![](${relPath})`);
                     }
                 });
             } else {
-                vscode.env.clipboard.writeText(`![${imgName}](${relPath})`)
+                vscode.env.clipboard.writeText(`![](${relPath})`)
                 vscode.commands.executeCommand("editor.action.clipboardPasteAction")
             }
         })
