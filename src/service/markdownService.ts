@@ -133,7 +133,7 @@ export class MarkdownService {
     }
 
     /**
-     * 如果粘贴板内是复制了一个文件, 取得路径进行复制
+     * 如果粘贴板内是复制了一个文件, 取得路径进行复制..
      */
     private copyFromPath(savedImagePath: string, targetPath: string) {
         if (savedImagePath.startsWith("copyed:")) {
